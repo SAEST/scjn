@@ -1,5 +1,8 @@
 pipeline {
-    agent any    
+    agent any
+    parameters {
+        string(name: 'GIT_COMMIT', defaultValue: '', description: 'Hash del commit específico de Git (opcional)')
+    }
     environment {
         VENV_DIR = '/var/jenkins_home/workspace/scjn/venv'
         // Establece la política CSP vacía para permitir que Jenkins muestre correctamente el HTML incrustado 
@@ -14,7 +17,17 @@ pipeline {
             steps {
                 //deleteDir()
                 //Clonar el repositorio Git
-                git url: 'https://github.com/SAEST/scjn.git', branch: 'main'
+                //git url: 'https://github.com/SAEST/scjn.git', branch: 'main'
+                checkout scm
+            }
+        }
+        stage('Build') {
+            steps {
+                script {
+                    def commitHash = params.GIT_COMMIT ?: env.GIT_COMMIT ?: "No disponible"
+                    echo "Commit actual: ${commitHash}"
+                    // Resto de los pasos de construcción usando commitHash
+                }
             }
         }
         stage('Install & Setup venv') {

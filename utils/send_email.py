@@ -44,7 +44,7 @@ def enviar_correo():
     blue_ocean_url = f"{os.getenv('JENKINS_URL')}blue/organizations/jenkins/{build_name}/detail/{build_name}/{build_number}/pipeline"
  
     # Configuración del mensaje
-    destinatarios = ["eric.ruiz@ine.mx", "georgina.cuadriello@ine.mx", "jessica.trejo@ine.mx", "cristhian.tellez@outlook.com"]
+    destinatarios = ["eric.ruiz@ine.mx"]#, "georgina.cuadriello@ine.mx", "jessica.trejo@ine.mx", "cristhian.tellez@outlook.com"]
     subject = f"[DEST][Jenkins] Resultado de ejecución de Pipeline: {build_name} Número: {build_number}"
      
     body = f"""
