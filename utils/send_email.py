@@ -48,7 +48,7 @@ def enviar_correo():
     subject = f"[DEST][Jenkins] Resultado de ejecución de Pipeline: {build_name} Número: {build_number}"
      
     body = f"""
-        <h2 style="color: #2E86C1;">Reporte de Ejecución del Pipeline</h2>
+        <h2 style="color: #2E86C1;"> Reporte de Ejecución de Cálculo y Validación de datos CSV Ministro(a) SCJN </h2>
         <p>Estimado equipo.</p>
         <p>El pipeline <strong>{build_name}</strong> ha finalizado. Aquí está el resumen:</p>
         <table style="width: 50%; border: 1px solid #ddd; border-collapse: collapse;">
