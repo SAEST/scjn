@@ -1,0 +1,12 @@
+requests
+pandas
+numpy
+selenium
+pillow
+chromedriver-autoinstaller
+pytest
+allure-pytest
+pytest-html
+pytest-html-merger
+beautifulsoup4
+bs4

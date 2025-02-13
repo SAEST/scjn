@@ -1,0 +1,7 @@
+﻿allure_story,valor,valor2,encabezado
+Validación de Actas Esperadas,calculo_actas_esperadas,actas_esperadas,ACTAS_ESPERADAS
+Validación de Actas Computadas,calculo_actas_computadas,actas_computadas,ACTAS_COMPUTADAS
+Validación de Porcentaje de Actas Computadas,calculo_porcentaje_actas_computadas,porcentaje_actas_computadas,PORCENTAJE_ACTAS_COMPUTADAS
+Validación de Lista Nominal de Actas Contabilizadas,calculo_ln_actas_computadas,ln_actas_computadas,LISTA_NOMINAL_ACTAS_COMPUTADAS
+Validación de Total Votos ,calculo_total_votos,total_votos,TOTAL_VOTOS
+Validación de Porcentaje de Participación Ciudadana,calculo_participacionciu,participacionciu,PORCENTAJE_PARTICIPACION_CIUDADANA
