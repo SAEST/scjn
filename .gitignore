@@ -1,0 +1,12 @@
+/__pycache__/
+/tests/__pycache__/
+/tests/pytestreport/
+/tests/screenshots_publi/
+/pages/__pycache__/
+/utils/__pycache__/
+/allure-results/
+*.csv
+*.zip
+*.txt
+*.html
+*.png
