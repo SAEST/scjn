@@ -17,11 +17,27 @@ def cargar_y_filtrar_datos():
     return df, df1
 
 def calcular_data_values(df, df1):
-    # Conversion de datos
-    df1[ACTAS_COMPUTADAS] = pd.to_numeric(df1[ACTAS_COMPUTADAS].str.replace(',', ''), errors='coerce')
-    df1[ACTAS_ESPERADAS] = pd.to_numeric(df1[ACTAS_ESPERADAS].str.replace(',', ''), errors='coerce')
-    df1[LISTA_NOMINAL_ACTAS_COMPUTADAS] = pd.to_numeric(df1[LISTA_NOMINAL_ACTAS_COMPUTADAS].str.replace(',', ''), errors='coerce')
-    df1[TOTAL_VOTOS] = pd.to_numeric(df1[TOTAL_VOTOS].str.replace(',', ''), errors='coerce')
+
+# Conversión y limpieza de datos (aplicar a todas las columnas necesarias)
+    for col in [ACTAS_COMPUTADAS, ACTAS_ESPERADAS, LISTA_NOMINAL_ACTAS_COMPUTADAS, TOTAL_VOTOS]:
+        if col in df1.columns: # Check if column exists to avoid errors
+            df1[col] = pd.to_numeric(df1[col].astype(str).str.replace(',', ''), errors='coerce').fillna(0) # Convert, replace commas, handle NaN
+
+# Extracción de datos
+    if not df1.empty:
+        try:
+            valores = df1.iloc[0][[ACTAS_COMPUTADAS, ACTAS_ESPERADAS, PORCENTAJE_ACTAS_COMPUTADAS, LISTA_NOMINAL_ACTAS_COMPUTADAS, TOTAL_VOTOS, PORCENTAJE_PARTICIPACION_CIUDADANA]]
+            actas_esperadas = int(valores[ACTAS_ESPERADAS] or 0)
+            actas_computadas = int(valores[ACTAS_COMPUTADAS] or 0) 
+            porcentaje_actas_computadas = float(valores[PORCENTAJE_ACTAS_COMPUTADAS] or 0.0)
+            ln_actas_computadas = int(valores[LISTA_NOMINAL_ACTAS_COMPUTADAS] or 0)
+            total_votos = int(valores[TOTAL_VOTOS] or 0)
+            participacionciu = float(valores[PORCENTAJE_PARTICIPACION_CIUDADANA] or 0.0)
+
+        except (ValueError, TypeError, KeyError) as e: 
+            print(f"Error al procesar datos: {e}")
+    else:
+        print("El DataFrame está vacío.")
 
     # Calculos
     calculo_actas_esperadas = len(df)
@@ -33,14 +49,6 @@ def calcular_data_values(df, df1):
     calculo_participacionciu = pd.Series(calculo_participacionciu)
     calculo_participacionciu = calculo_participacionciu.apply(lambda x: int(x * 10000) / 10000)
     calculo_participacionciu = calculo_participacionciu.iloc[0]
-
-    # Datos directamente de df1
-    actas_esperadas = df1[ACTAS_COMPUTADAS].iloc[0]
-    actas_computadas = df1[ACTAS_COMPUTADAS].iloc[0]
-    porcentaje_actas_computadas = df1[PORCENTAJE_ACTAS_COMPUTADAS].iloc[0]
-    ln_actas_computadas = df1[LISTA_NOMINAL_ACTAS_COMPUTADAS].iloc[0]
-    total_votos = df1[TOTAL_VOTOS].iloc[0]
-    participacionciu = df1[PORCENTAJE_PARTICIPACION_CIUDADANA].iloc[0]
 
     return {
         "calculo_actas_esperadas": calculo_actas_esperadas,
